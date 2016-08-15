@@ -24,7 +24,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::initCourses()
 {
-    QUrl url = QUrl("http://qatime.cn/api/v1/live_studio/teachers/20/courses");
+    QUrl url = QUrl("http://qatime.cn/api/v1/live_studio/teachers/20/courses/full");
     QNetworkRequest request(url);
     QString str = this->mRemeberToken;
 
@@ -62,6 +62,7 @@ void MainWindow::requestFinished()
         {
             Lesson *lesson = new Lesson();
             lesson->readJson(value.toObject());
+            lesson->setCourseId(course->id());
             this->myLessons.append(lesson);
         }
     }
@@ -73,12 +74,8 @@ void MainWindow::on_coursesBox_currentIndexChanged(int index)
     this->ui->lessonsBox->clear();
     foreach (Lesson *lesson, this->myLessons)
     {
-        qInfo("============");
-        qInfo("============");
-
         if(lesson->courseId() == courseId)
         {
-            qInfo(lesson->name().toUtf8());
             this->ui->lessonsBox->addItem(lesson->name());
         }
     }

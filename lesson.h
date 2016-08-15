@@ -9,6 +9,7 @@ public:
     Lesson();
     void readJson(const QJsonObject &json);
     int courseId();
+    void setCourseId(int courseId);
     QString name();
 
 private:

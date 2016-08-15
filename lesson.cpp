@@ -18,6 +18,11 @@ int Lesson::courseId()
     return mCourseId;
 }
 
+void Lesson::setCourseId(int courseId)
+{
+    mCourseId = courseId;
+}
+
 QString Lesson::name()
 {
     return mName;
