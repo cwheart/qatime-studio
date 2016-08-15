@@ -4,7 +4,10 @@
 #include <QMainWindow>
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
+#include <QList>
 #include "user.h"
+#include "course.h"
+#include "lesson.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +26,9 @@ public:
     void requestFinished();
     void initCourses();
 
+private slots:
+    void on_coursesBox_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     User *currentUser;
@@ -30,6 +36,8 @@ private:
 
     QNetworkAccessManager manager;
     QNetworkReply *reply;
+    QList<Course *> myCourses;
+    QList<Lesson *> myLessons;
 
 };
 

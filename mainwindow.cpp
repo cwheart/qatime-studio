@@ -6,6 +6,9 @@
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
+#include "course.h"
+#include "lesson.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -46,4 +49,37 @@ void MainWindow::requestFinished()
     QByteArray result = reply->readAll();
     QJsonDocument document(QJsonDocument::fromJson(result));
     QJsonObject obj = document.object();
+    QJsonArray courses = obj["data"].toArray();
+    foreach (const QJsonValue & value, courses)
+    {
+        QJsonObject obj = value.toObject();
+        Course *course = new Course();
+        course->readJson(value.toObject());
+        this->myCourses.append(course);
+        this->ui->coursesBox->addItem(course->name(), QVariant(course->id()));
+        QJsonArray lessons = obj["lessons"].toArray();
+        foreach (const QJsonValue & value, lessons)
+        {
+            Lesson *lesson = new Lesson();
+            lesson->readJson(value.toObject());
+            this->myLessons.append(lesson);
+        }
+    }
+}
+
+void MainWindow::on_coursesBox_currentIndexChanged(int index)
+{
+    int courseId = this->myCourses[index]->id();
+    this->ui->lessonsBox->clear();
+    foreach (Lesson *lesson, this->myLessons)
+    {
+        qInfo("============");
+        qInfo("============");
+
+        if(lesson->courseId() == courseId)
+        {
+            qInfo(lesson->name().toUtf8());
+            this->ui->lessonsBox->addItem(lesson->name());
+        }
+    }
 }

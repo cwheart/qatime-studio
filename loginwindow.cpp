@@ -26,6 +26,7 @@ void LoginWindow::on_loginButton_clicked()
     append.append("&email=");
     append += this->ui->accountText->text();
     append.append("&password=");
+    qInfo(append);
     append += this->ui->passwordText->text();
     QNetworkRequest request(url);
     reply = manager.post(request, append);
