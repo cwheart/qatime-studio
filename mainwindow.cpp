@@ -28,7 +28,6 @@ void MainWindow::initCourses()
     QNetworkRequest request(url);
     QString str = this->mRemeberToken;
 
-    qInfo(this->mRemeberToken.toUtf8());
     request.setRawHeader("Remember-Token", this->mRemeberToken.toUtf8());
     reply = manager.get(request);
     connect(reply, &QNetworkReply::finished, this, &MainWindow::requestFinished);
