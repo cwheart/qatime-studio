@@ -9,6 +9,8 @@
 #include <QJsonArray>
 #include "course.h"
 #include "lesson.h"
+#include <QVideoWidget>
+#include <QMediaPlayer>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,6 +26,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::initCourses()
 {
+
+    QMediaPlayer *player = new QMediaPlayer;
+    QVideoWidget *videoWidget = new QVideoWidget();
+    ui->media->addWidget(videoWidget);
+
+    player->setVideoOutput(videoWidget);
+    videoWidget->show();
+
+
     QUrl url = QUrl("http://qatime.cn/api/v1/live_studio/teachers/20/courses/full");
     QNetworkRequest request(url);
     QString str = this->mRemeberToken;

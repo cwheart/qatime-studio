@@ -37,6 +37,17 @@
      </rect>
     </property>
    </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>40</y>
+      <width>841</width>
+      <height>531</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="media"/>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

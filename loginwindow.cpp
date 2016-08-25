@@ -48,7 +48,7 @@ void LoginWindow::loginFinished()
         mainWin->setRemeberToken(data["remember_token"].toString());
         mainWin->initCourses();
         mainWin->show();
-        this->hide();
+        this->destroy();
     }
     else
     {
